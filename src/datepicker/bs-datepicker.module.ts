@@ -3,13 +3,14 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader';
 import { PositioningService } from 'ngx-bootstrap/positioning';
 
-import { warnOnce } from 'ngx-bootstrap/utils';
 import { BsDatepickerInputDirective } from './bs-datepicker-input.directive';
 import { BsDatepickerDirective } from './bs-datepicker.component';
 import { BsDatepickerConfig } from './bs-datepicker.config';
 import { BsDaterangepickerInputDirective } from './bs-daterangepicker-input.directive';
 import { BsDaterangepickerDirective } from './bs-daterangepicker.component';
 import { BsDaterangepickerConfig } from './bs-daterangepicker.config';
+import { BsDatepickerInlineDirective } from './bs-datepicker-inline.component';
+import { BsDatepickerInlineConfig } from './bs-datepicker-inline.config';
 
 import { BsLocaleService } from './bs-locale.service';
 import { BsDatepickerActions } from './reducer/bs-datepicker.actions';
@@ -26,17 +27,8 @@ import { BsDaysCalendarViewComponent } from './themes/bs/bs-days-calendar-view.c
 import { BsMonthCalendarViewComponent } from './themes/bs/bs-months-calendar-view.component';
 import { BsTimepickerViewComponent } from './themes/bs/bs-timepicker-view.component';
 import { BsYearsCalendarViewComponent } from './themes/bs/bs-years-calendar-view.component';
+import { BsDatepickerInlineContainerComponent } from './themes/bs/bs-datepicker-inline-container.component';
 
-const _exports = [
-  BsDatepickerContainerComponent,
-  BsDaterangepickerContainerComponent,
-
-  BsDatepickerDirective,
-  BsDatepickerInputDirective,
-
-  BsDaterangepickerInputDirective,
-  BsDaterangepickerDirective
-];
 
 @NgModule({
   imports: [CommonModule],
@@ -45,29 +37,37 @@ const _exports = [
     BsCurrentDateViewComponent,
     BsDatepickerNavigationViewComponent,
     BsTimepickerViewComponent,
-
     BsCalendarLayoutComponent,
     BsDaysCalendarViewComponent,
     BsMonthCalendarViewComponent,
     BsYearsCalendarViewComponent,
-
     BsCustomDatesViewComponent,
-
-    ..._exports
+    BsDatepickerContainerComponent,
+    BsDaterangepickerContainerComponent,
+    BsDatepickerInlineContainerComponent,
+    BsDatepickerDirective,
+    BsDatepickerInputDirective,
+    BsDaterangepickerInputDirective,
+    BsDaterangepickerDirective,
+    BsDatepickerInlineDirective
   ],
   entryComponents: [
     BsDatepickerContainerComponent,
-    BsDaterangepickerContainerComponent
+    BsDaterangepickerContainerComponent,
+    BsDatepickerInlineContainerComponent
   ],
-  exports: _exports
+  exports: [
+    BsDatepickerContainerComponent,
+    BsDaterangepickerContainerComponent,
+    BsDatepickerInlineContainerComponent,
+    BsDatepickerDirective,
+    BsDatepickerInputDirective,
+    BsDaterangepickerInputDirective,
+    BsDaterangepickerDirective,
+    BsDatepickerInlineDirective
+  ]
 })
 export class BsDatepickerModule {
-  constructor() {
-    warnOnce(`BsDatepickerModule is under development,
-      BREAKING CHANGES are possible,
-      PLEASE, read changelog`);
-  }
-
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: BsDatepickerModule,
@@ -78,6 +78,7 @@ export class BsDatepickerModule {
         BsDatepickerActions,
         BsDatepickerConfig,
         BsDaterangepickerConfig,
+        BsDatepickerInlineConfig,
         BsDatepickerEffects,
         BsLocaleService
       ]
